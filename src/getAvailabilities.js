@@ -1,4 +1,4 @@
-import moment from "moment";
+var moment = require('moment');
 import knex from "knexClient";
 
 export default async function getAvailabilities(date) {

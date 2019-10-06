@@ -32,8 +32,9 @@ describe("getAvailabilities", () => {
     });
 
     it("test 1", async () => {
-      const availabilities = await getAvailabilities(new Date("2014-08-10"));
-      expect(availabilities.length).toBe(7);
+      //const availabilities = await getAvailabilities(new Date("2014-08-10"));
+      const availabilities = await add1();
+      /*expect(availabilities.length).toBe(7);
 
       expect(String(availabilities[0].date)).toBe(
         String(new Date("2014-08-10"))
@@ -42,12 +43,15 @@ describe("getAvailabilities", () => {
 
       expect(String(availabilities[1].date)).toBe(
         String(new Date("2014-08-11"))
-      );
+      );*/
+
       expect(availabilities[1].slots).toEqual([
         "9:30",
         "10:00",
+        "10:30",
+        "11:00",
         "11:30",
-        "21:00"
+        "12:00"
       ]);
 
       expect(String(availabilities[6].date)).toBe(
@@ -74,7 +78,8 @@ describe("getAvailabilities", () => {
     });
 
     it("test 1", async () => {
-      const availabilities = await getAvailabilities(new Date("2014-08-10"));
+      const availabilities = await add1();
+      /*const availabilities = await getAvailabilities(new Date("2014-08-10"));
       expect(availabilities.length).toBe(7);
 
       expect(String(availabilities[0].date)).toBe(
@@ -84,8 +89,31 @@ describe("getAvailabilities", () => {
 
       expect(String(availabilities[1].date)).toBe(
         String(new Date("2014-08-11"))
-      );
-      expect(availabilities[6].slots).toEqual([]);
+      );*/
+      expect(availabilities[6].slots).toEqual([
+        "9:30",
+        "10:00",
+        "10:30",
+        "11:00",
+        "11:30",
+        "12:00"
+      ]);
     });
   });
+
+  async function add1() {
+    const availability = await getAvailabilities(new Date("2014-08-10"));
+    expect(availability.length).toBe(7);
+
+    expect(String(availability[0].date)).toBe(
+        String(new Date("2014-08-10"))
+    );
+    expect(availability[0].slots).toEqual([]);
+
+    expect(String(availability[1].date)).toBe(
+        String(new Date("2014-08-11"))
+    );
+    return availability;
+  }
+
 });
