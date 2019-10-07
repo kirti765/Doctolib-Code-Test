@@ -3,10 +3,10 @@ import getAvailabilities from "./getAvailabilities";
 
 describe("getAvailabilities", () => {
   beforeEach(() => knex("events").truncate());
-
+ let availabilities;
   describe("case 1", () => {
     it("test 1", async () => {
-      const availabilities = await getAvailabilities(new Date("2014-08-10"));
+      availabilities = await getAvailabilities(new Date("2014-08-10"));
       expect(availabilities.length).toBe(7);
       for (let i = 0; i < 7; ++i) {
         expect(availabilities[i].slots).toEqual([]);
@@ -32,18 +32,7 @@ describe("getAvailabilities", () => {
     });
 
     it("test 1", async () => {
-      //const availabilities = await getAvailabilities(new Date("2014-08-10"));
-      const availabilities = await add1();
-      /*expect(availabilities.length).toBe(7);
-
-      expect(String(availabilities[0].date)).toBe(
-        String(new Date("2014-08-10"))
-      );
-      expect(availabilities[0].slots).toEqual([]);
-
-      expect(String(availabilities[1].date)).toBe(
-        String(new Date("2014-08-11"))
-      );*/
+      availabilities = await getAvailability();
 
       expect(availabilities[1].slots).toEqual([
         "9:30",
@@ -78,7 +67,7 @@ describe("getAvailabilities", () => {
     });
 
     it("test 1", async () => {
-      const availabilities = await add1();
+      availabilities = await getAvailability();
       expect(availabilities[6].slots).toEqual([
         "9:30",
         "10:00",
@@ -90,7 +79,7 @@ describe("getAvailabilities", () => {
     });
   });
 
-  async function add1() {
+  async function getAvailability() {
     const availability = await getAvailabilities(new Date("2014-08-10"));
     expect(availability.length).toBe(7);
 
